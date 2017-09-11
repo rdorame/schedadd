@@ -6,8 +6,6 @@ from django.dispatch import receiver
 
 class Parent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=20, blank=False)
-    lastName = models.CharField(max_length=20, blank=False)
     cellphone = models.IntegerField(blank=False, null=False, default=2222222222)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

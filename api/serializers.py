@@ -1,13 +1,6 @@
 from rest_framework import serializers
-from .models import Parent, Son
+from .models import Son
 from django.contrib.auth.models import User
-
-class ParentSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Parent
-        fields = ('id', 'name', 'lastName', 'mail', 'password', 'cellphone')
-        read_only_fields = ('date_created', 'date_modified')
 
 class SonSerializer(serializers.ModelSerializer):
 
@@ -19,11 +12,9 @@ class SonSerializer(serializers.ModelSerializer):
         read_only_fields = ('date_created', 'date_modified')
 
 class UserSerializer(serializers.ModelSerializer):
-    """A user serializer to aid in authentication and authorization."""
-
     sons = serializers.PrimaryKeyRelatedField(many=True, queryset=Son.objects.all())
+    password = serializers.CharField(write_only=True)
 
     class Meta:
-        """Map this serializer to the default django user model."""
         model = User
-        fields = ('id', 'username', 'sons', 'email', 'password')
+        fields = ('first_name', 'last_name', 'email', 'password', 'sons')
