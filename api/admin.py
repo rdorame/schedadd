@@ -18,9 +18,8 @@ class UserAdmin(BaseUserAdmin):
     inlines = (ParentInline, )
 
 # Register your models here.
+admin.site.register(Son)
 
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
-
-admin.site.register(Son)
