@@ -1,7 +1,0 @@
-{
-  "name": "schedadd-client",
-  "description": "SchedADD client application",
-  "dependencies": {
-    "express": "^4.13.4"
-  }
-}

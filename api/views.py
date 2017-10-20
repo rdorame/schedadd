@@ -5,13 +5,12 @@ from .models import Parent, Son, Schedule, Activity, PanicButtonCall
 from .permissions import IsOwner
 from django.contrib.auth.models import User
 #User views
-class UserView(generics.ListAPIView):
+class UserView(generics.ListCreateAPIView):
     """View to list the user queryset."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
     def perform_create(self, serializer):
             serializer.save()
-
 
 class UserDetailsView(generics.RetrieveAPIView):
     """View to retrieve a user instance."""
