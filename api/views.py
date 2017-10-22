@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .serializers import SonSerializer, UserSerializer, ScheduleSerializer, ActivitySerializer, PanicButtonCallSerializer
 from .models import Parent, Son, Schedule, Activity, PanicButtonCall
 from .permissions import IsOwner
@@ -67,3 +69,11 @@ class CreatePanicButtonCallView(generics.ListCreateAPIView):
 class DetailsPanicButtonCallView(generics.RetrieveUpdateDestroyAPIView):
     queryset = PanicButtonCall.objects.all()
     serializer_class = PanicButtonCallSerializer
+
+class Logout(APIView):
+    queryset = User.objects.all()
+
+    def get(self, request, format=None):
+        # simply delete the token to force a login
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)
